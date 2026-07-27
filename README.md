@@ -48,6 +48,11 @@ Wired up to Supabase and editable from the dashboard right now:
 - Hero role line
 - The four hero stats (number + label)
 - About section lead paragraph
+- **Highlights** — a flexible block editor: add/remove blocks of type Text, Image, Video, or Link, in any order. Appears as its own "Highlights" section on the live site, right after Writing. Leave it empty and the section stays hidden — nothing shows on the page.
+  - Image: paste a direct image URL
+  - Video: paste a YouTube link, a Vimeo link, or a direct .mp4 URL — the site picks the right embed automatically
+  - Link: paste a URL + a button label (e.g. "Watch the demo")
+  - Text: title + body only, no URL needed
 
 **Projects and Experience** are drafted as JSON in the dashboard for convenience, but the public page still reads those sections directly from `index.html`. If you want them fully live-editable too, that's a bigger change (an admin repeater UI for each project/job) — happy to build that next if it'd help; for now, edit the JSON draft in the dashboard, then send it back to Claude to apply to the page directly.
 

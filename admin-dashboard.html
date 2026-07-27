@@ -53,6 +53,22 @@
     max-width:600px; margin:80px auto; padding:20px 24px; border:1px solid var(--burnt); border-radius:2px;
     font-family:'Space Mono', monospace; font-size:12.5px; color:#e2a07a; line-height:1.7;
   }
+  .block-row{ border:1px solid var(--line); border-radius:6px; padding:16px; margin-bottom:14px; background:var(--ink-2); }
+  .block-row-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+  .block-row-head select{
+    width:auto; padding:8px 10px; background:var(--ink); border:1px solid var(--line); border-radius:2px;
+    color:var(--text); font-family:'Space Mono', monospace; font-size:12px;
+  }
+  .remove-block-btn{
+    background:none; border:1px solid var(--line); color:var(--text-dim); font-family:'Space Mono', monospace;
+    font-size:11px; padding:7px 12px; border-radius:2px; cursor:pointer; transition:.2s;
+  }
+  .remove-block-btn:hover{ border-color:#e2795a; color:#e2795a; }
+  .addblock-btn{
+    width:100%; padding:12px; background:none; border:1px dashed var(--line); color:var(--text-dim);
+    font-family:'Space Mono', monospace; font-size:12px; border-radius:4px; cursor:pointer; transition:.2s;
+  }
+  .addblock-btn:hover{ border-color:var(--accent); color:var(--accent); }
 </style>
 </head>
 <body>
@@ -78,6 +94,13 @@
       <label for="aboutLead">Lead paragraph (first paragraph under "01 — About")</label>
       <textarea id="aboutLead"></textarea>
       <div class="hint">HTML is allowed here — e.g. &lt;strong&gt;text&lt;/strong&gt; to highlight a word, matching the site's accent style.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Highlights (text, images, videos, links)</legend>
+      <div class="hint" style="margin-bottom:14px;">Appears as a "Highlights" section on the live site, in this order. Leave empty and the section stays hidden. For Image/Video, paste a direct URL (e.g. an image link, a YouTube/Vimeo link, or a direct .mp4 link).</div>
+      <div id="blocksList"></div>
+      <button type="button" class="addblock-btn" id="addBlockBtn">+ Add Block</button>
     </fieldset>
 
     <fieldset>
@@ -136,6 +159,55 @@
     document.getElementById('projectsJson').value = c.projectsJson || '';
     document.getElementById('experienceJson').value = c.experienceJson || '';
 
+    // ---- Highlights content blocks (text / image / video / link) ----
+    const blocksList = document.getElementById('blocksList');
+
+    function addBlockRow(block){
+      block = block || { type:'text', title:'', body:'', url:'', linkLabel:'' };
+      const row = document.createElement('div');
+      row.className = 'block-row';
+      row.innerHTML = `
+        <div class="block-row-head">
+          <select class="b-type">
+            <option value="text">Text</option>
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+            <option value="link">Link</option>
+          </select>
+          <button type="button" class="remove-block-btn">Remove</button>
+        </div>
+        <label>Title (optional)</label>
+        <input class="b-title" type="text">
+        <label>Text / Caption</label>
+        <textarea class="b-body" style="min-height:70px;"></textarea>
+        <label>URL (image / video / link — leave blank for plain text)</label>
+        <input class="b-url" type="text" placeholder="https://...">
+        <label>Button label (link blocks only)</label>
+        <input class="b-linklabel" type="text" placeholder="e.g. Watch the demo">
+      `;
+      row.querySelector('.b-type').value = block.type;
+      row.querySelector('.b-title').value = block.title;
+      row.querySelector('.b-body').value = block.body;
+      row.querySelector('.b-url').value = block.url;
+      row.querySelector('.b-linklabel').value = block.linkLabel;
+      row.querySelector('.remove-block-btn').addEventListener('click', () => row.remove());
+      blocksList.appendChild(row);
+    }
+
+    (c.blocks || []).forEach(addBlockRow);
+
+    document.getElementById('addBlockBtn').addEventListener('click', () => addBlockRow());
+
+    function collectBlocks(){
+      return Array.from(blocksList.querySelectorAll('.block-row')).map(row => ({
+        type: row.querySelector('.b-type').value,
+        title: row.querySelector('.b-title').value,
+        body: row.querySelector('.b-body').value,
+        url: row.querySelector('.b-url').value,
+        linkLabel: row.querySelector('.b-linklabel').value
+      })).filter(b => b.title || b.body || b.url);
+    }
+
     document.getElementById('saveBtn').addEventListener('click', async function(){
       const btn = this;
       const saveMsg = document.getElementById('saveMsg');
@@ -144,6 +216,7 @@
 
       const payload = {
         aboutLead: document.getElementById('aboutLead').value,
+        blocks: collectBlocks(),
         projectsJson: document.getElementById('projectsJson').value,
         experienceJson: document.getElementById('experienceJson').value
       };
