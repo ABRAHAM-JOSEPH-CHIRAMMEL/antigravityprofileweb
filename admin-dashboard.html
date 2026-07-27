@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Abraham Joseph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#000000; --ink-2:#0c0c0c; --text:#f5f5f2; --text-dim:#8f8f8a;
+    --mustard:#d9a441; --burnt:#d9a441; --accent:#d9a441; --olive:#2a2a28; --line:#212120;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--ink); color:var(--text); font-family:'Space Grotesk', sans-serif; min-height:100vh; }
+  .mono{ font-family:'Space Mono', monospace; }
+  header{ display:flex; justify-content:space-between; align-items:center; padding:22px 32px; border-bottom:1px solid var(--line); }
+  header h1{ font-size:18px; font-weight:700; }
+  header .who{ font-family:'Space Mono', monospace; font-size:12px; color:var(--text-dim); }
+  .signout{
+    font-family:'Space Mono', monospace; font-size:12px; padding:9px 16px; border:1px solid var(--line);
+    border-radius:2px; background:transparent; color:var(--text); cursor:pointer; transition:.2s;
+  }
+  .signout:hover{ border-color:var(--accent); color:var(--accent); }
+  main{ max-width:820px; margin:0 auto; padding:48px 32px 100px; }
+  .gate{ max-width:820px; margin:0 auto; padding:100px 32px; text-align:center; font-family:'Space Mono', monospace; color:var(--text-dim); }
+  fieldset{ border:1px solid var(--line); border-radius:2px; padding:24px; margin-bottom:28px; }
+  legend{ font-family:'Space Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); padding:0 8px; }
+  label{ display:block; font-family:'Space Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-dim); margin-bottom:8px; margin-top:18px; }
+  label:first-of-type{ margin-top:0; }
+  input, textarea{
+    width:100%; padding:12px 14px; background:var(--ink-2); border:1px solid var(--line); border-radius:2px;
+    color:var(--text); font-family:'Space Grotesk', sans-serif; font-size:14px; transition:border-color .2s;
+  }
+  textarea{ font-family:'Space Mono', monospace; font-size:12.5px; min-height:160px; resize:vertical; line-height:1.6; }
+  input:focus, textarea:focus{ outline:none; border-color:var(--mustard); }
+  .stats-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .hint{ font-size:12px; color:var(--text-dim); margin-top:6px; line-height:1.6; }
+  .save-bar{
+    position:sticky; bottom:0; background:var(--ink); border-top:1px solid var(--line);
+    padding:18px 0; margin-top:8px; display:flex; align-items:center; gap:16px;
+  }
+  button.primary{
+    padding:13px 26px; background:var(--text); color:var(--ink); border:none; border-radius:2px;
+    font-family:'Space Mono', monospace; font-weight:700; font-size:13px; cursor:pointer; transition:.2s;
+  }
+  button.primary:hover{ background:var(--accent); }
+  button.primary:disabled{ opacity:.5; cursor:not-allowed; }
+  .save-msg{ font-family:'Space Mono', monospace; font-size:12.5px; }
+  .save-msg.ok{ color:#7fbf7f; }
+  .save-msg.error{ color:#e2795a; }
+  .config-warn{
+    max-width:600px; margin:80px auto; padding:20px 24px; border:1px solid var(--burnt); border-radius:2px;
+    font-family:'Space Mono', monospace; font-size:12.5px; color:#e2a07a; line-height:1.7;
+  }
+</style>
+</head>
+<body>
+
+<div id="configWarn" class="config-warn" style="display:none;">
+  Supabase isn't configured yet. Set SUPABASE_URL and SUPABASE_ANON_KEY in this file's script tag (same values as admin-login.html) before using the dashboard. See README.md for the full setup.
+</div>
+
+<div id="gate" class="gate" style="display:none;">Checking session…</div>
+
+<div id="app" style="display:none;">
+  <header>
+    <h1>Content Editor</h1>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <span class="who mono" id="whoami"></span>
+      <button class="signout" id="signOutBtn">Sign Out</button>
+    </div>
+  </header>
+
+  <main>
+    <fieldset>
+      <legend>About</legend>
+      <label for="aboutLead">Lead paragraph (first paragraph under "01 — About")</label>
+      <textarea id="aboutLead"></textarea>
+      <div class="hint">HTML is allowed here — e.g. &lt;strong&gt;text&lt;/strong&gt; to highlight a word, matching the site's accent style.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Projects &amp; Experience (advanced)</legend>
+      <div class="hint" style="margin-bottom:14px;">These aren't wired into the live page yet — the public site currently reads them directly from index.html. Use this space to draft updates as JSON, then ask Claude to apply them to the page next time you're editing the site.</div>
+      <label for="projectsJson">Projects (JSON draft)</label>
+      <textarea id="projectsJson" placeholder='[{"title":"...","year":"2026","description":"...","tags":["ESP32"]}]'></textarea>
+      <label for="experienceJson">Experience (JSON draft)</label>
+      <textarea id="experienceJson" placeholder='[{"role":"...","org":"...","when":"...","description":"..."}]'></textarea>
+    </fieldset>
+
+    <div class="save-bar">
+      <button class="primary" id="saveBtn">Save Changes</button>
+      <span class="save-msg" id="saveMsg"></span>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://lnihafgnujxdcmhwjrhc.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxuaWhhZmdudWp4ZGNtaHdqcmhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1MjAzMDEsImV4cCI6MjEwMDA5NjMwMX0.TSYxT_C-mDZ6n-WGIzoHDsCzxss_XIx0_SFiwbWxkUo";
+
+  const notConfigured = SUPABASE_URL.indexOf("YOUR_SUPABASE") === 0;
+  if (notConfigured) {
+    document.getElementById('configWarn').style.display = 'block';
+  } else {
+    init();
+  }
+
+  async function init(){
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const gate = document.getElementById('gate');
+    gate.style.display = 'block';
+
+    const { data: sessionData } = await client.auth.getSession();
+    if (!sessionData.session) {
+      window.location.href = 'admin-login.html';
+      return;
+    }
+
+    gate.style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('whoami').textContent = sessionData.session.user.email;
+
+    document.getElementById('signOutBtn').addEventListener('click', async function(){
+      await client.auth.signOut();
+      window.location.href = 'admin-login.html';
+    });
+
+    // Load current content (creates the row on first save if it doesn't exist yet)
+    const { data: row } = await client.from('site_content').select('data').eq('id','main').single();
+    const c = (row && row.data) || {};
+
+    document.getElementById('aboutLead').value = c.aboutLead || '';
+    document.getElementById('projectsJson').value = c.projectsJson || '';
+    document.getElementById('experienceJson').value = c.experienceJson || '';
+
+    document.getElementById('saveBtn').addEventListener('click', async function(){
+      const btn = this;
+      const saveMsg = document.getElementById('saveMsg');
+      saveMsg.textContent = ''; saveMsg.className = 'save-msg';
+      btn.disabled = true; btn.textContent = 'Saving…';
+
+      const payload = {
+        aboutLead: document.getElementById('aboutLead').value,
+        projectsJson: document.getElementById('projectsJson').value,
+        experienceJson: document.getElementById('experienceJson').value
+      };
+
+      const { error } = await client.from('site_content').upsert({ id:'main', data: payload, updated_at: new Date().toISOString() });
+
+      btn.disabled = false; btn.textContent = 'Save Changes';
+
+      if (error) {
+        saveMsg.textContent = 'Error: ' + error.message;
+        saveMsg.className = 'save-msg error';
+        return;
+      }
+      saveMsg.textContent = 'Saved — live on the site.';
+      saveMsg.className = 'save-msg ok';
+    });
+  }
+</script>
+</body>
+</html>

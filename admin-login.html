@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Abraham Joseph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#000000; --ink-2:#0c0c0c; --text:#f5f5f2; --text-dim:#8f8f8a;
+    --mustard:#d9a441; --burnt:#d9a441; --accent:#d9a441; --olive:#2a2a28; --line:#212120;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ink); color:var(--text); font-family:'Space Grotesk', sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+  }
+  .mono{ font-family:'Space Mono', monospace; }
+  .card{
+    width:100%; max-width:400px; background:rgba(8,8,8,0.92); border:1px solid var(--line);
+    border-radius:3px; padding:44px 36px; backdrop-filter:blur(6px);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .eyebrow{ font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-dim); margin-bottom:10px; }
+  h1{ font-size:26px; font-weight:700; letter-spacing:-0.01em; margin-bottom:6px; }
+  .sub{ color:var(--text-dim); font-size:13.5px; margin-bottom:32px; }
+  label{ display:block; font-family:'Space Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-dim); margin-bottom:8px; }
+  .field{ margin-bottom:20px; }
+  input{
+    width:100%; padding:13px 14px; background:var(--ink-2); border:1px solid var(--line); border-radius:2px;
+    color:var(--text); font-family:'Space Grotesk', sans-serif; font-size:14.5px; transition:border-color .2s;
+  }
+  input:focus{ outline:none; border-color:var(--accent); }
+  button{
+    width:100%; padding:14px; margin-top:8px; background:var(--text); color:var(--ink); border:none;
+    border-radius:2px; font-family:'Space Mono', monospace; font-weight:700; font-size:13px; letter-spacing:0.04em;
+    cursor:pointer; transition:background .2s;
+  }
+  button:hover{ background:var(--accent); }
+  button:disabled{ opacity:0.5; cursor:not-allowed; }
+  .msg{ margin-top:16px; font-size:13px; font-family:'Space Mono', monospace; min-height:18px; }
+  .msg.error{ color:#e2795a; }
+  .msg.ok{ color:#7fbf7f; }
+  .back{ display:block; margin-top:28px; text-align:center; font-family:'Space Mono', monospace; font-size:12px; color:var(--text-dim); text-decoration:none; }
+  .back:hover{ color:var(--accent); }
+  .config-warn{
+    margin-top:24px; padding:12px 14px; border:1px solid var(--burnt); border-radius:2px;
+    font-family:'Space Mono', monospace; font-size:11.5px; color:#e2a07a; line-height:1.6; display:none;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">Restricted</div>
+    <h1>Admin Login</h1>
+    <p class="sub">Sign in to edit site content.</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" id="submitBtn">Log In</button>
+      <div class="msg" id="msg"></div>
+    </form>
+
+    <a class="back" href="#" id="forgotLink" style="margin-top:18px;">Forgot password?</a>
+
+    <div class="config-warn" id="configWarn">
+      Supabase isn't configured yet — set SUPABASE_URL and SUPABASE_ANON_KEY in this file's script tag before logging in. See README.md.
+    </div>
+
+    <a class="back" href="index.html">← Back to site</a>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://lnihafgnujxdcmhwjrhc.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxuaWhhZmdudWp4ZGNtaHdqcmhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1MjAzMDEsImV4cCI6MjEwMDA5NjMwMX0.TSYxT_C-mDZ6n-WGIzoHDsCzxss_XIx0_SFiwbWxkUo";
+
+  const notConfigured = SUPABASE_URL.indexOf("YOUR_SUPABASE") === 0;
+  if (notConfigured) {
+    document.getElementById('configWarn').style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+  }
+
+  const client = notConfigured ? null : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // If already logged in, go straight to dashboard.
+  (async function checkSession(){
+    if (!client) return;
+    const { data } = await client.auth.getSession();
+    if (data.session) window.location.href = 'admin-dashboard.html';
+  })();
+
+  document.getElementById('loginForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    if (!client) return;
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('submitBtn');
+    msg.textContent = ''; msg.className = 'msg';
+    btn.disabled = true; btn.textContent = 'Logging in…';
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    const { error } = await client.auth.signInWithPassword({ email, password });
+
+    btn.disabled = false; btn.textContent = 'Log In';
+
+    if (error) {
+      msg.textContent = error.message;
+      msg.className = 'msg error';
+      return;
+    }
+    msg.textContent = 'Success — redirecting…';
+    msg.className = 'msg ok';
+    window.location.href = 'admin-dashboard.html';
+  });
+
+  document.getElementById('forgotLink').addEventListener('click', async function(e){
+    e.preventDefault();
+    if (!client) return;
+    const msg = document.getElementById('msg');
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+      msg.textContent = 'Enter your email above first, then click "Forgot password?"';
+      msg.className = 'msg error';
+      return;
+    }
+    const resetUrl = window.location.href.replace('admin-login.html', 'reset-password.html');
+    const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo: resetUrl });
+    if (error) {
+      msg.textContent = error.message;
+      msg.className = 'msg error';
+      return;
+    }
+    msg.textContent = 'Reset link sent — check your email.';
+    msg.className = 'msg ok';
+  });
+</script>
+</body>
+</html>
