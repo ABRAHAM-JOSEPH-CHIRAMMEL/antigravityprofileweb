@@ -80,14 +80,18 @@
 
   /* ===== hero — centered, typographic, reference-simple ===== */
   .hero{ min-height:82vh; display:flex; flex-direction:column; justify-content:center; padding:110px 32px 50px; position:relative; overflow:hidden; }
-  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center; max-width:var(--maxw); margin:0 auto; width:100%; }
+  .hero-grid{ display:grid; grid-template-columns:1.5fr 0.5fr; gap:32px; align-items:center; max-width:var(--maxw); margin:0 auto; width:100%; }
   @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; text-align:center; } }
-  .hero-portrait{ position:relative; order:2; }
-  @media (max-width:900px){ .hero-portrait{ order:-1; max-width:220px; margin:0 auto; } }
-  .portrait-glow{ position:absolute; inset:-40px; z-index:0; background:radial-gradient(circle, rgba(217,164,65,.14), transparent 68%); filter:blur(30px); }
-  .portrait-frame{ position:relative; z-index:1; border-radius:18px; overflow:hidden; border:1px solid var(--line); aspect-ratio:4/5; box-shadow:0 40px 80px -30px rgba(0,0,0,.85); }
-  .portrait-frame img{ width:100%; height:100%; object-fit:cover; transform:scaleX(-1); filter:grayscale(1) contrast(1.08) brightness(0.96); }
-  .portrait-frame::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top, var(--ink) 0%, transparent 32%); }
+  .hero-portrait{ position:relative; order:2; max-width:230px; margin-left:auto; }
+  @media (max-width:900px){ .hero-portrait{ order:-1; max-width:170px; margin:0 auto; } }
+  .portrait-glow{ position:absolute; inset:-30px; z-index:0; background:radial-gradient(circle, rgba(217,164,65,.16), transparent 70%); filter:blur(28px); }
+  .portrait-frame{ position:relative; z-index:1; aspect-ratio:4/5; }
+  .portrait-frame img{
+    width:100%; height:100%; object-fit:cover; transform:scaleX(-1);
+    filter:grayscale(1) contrast(1.12) brightness(0.95);
+    -webkit-mask-image:radial-gradient(ellipse 56% 62% at 50% 40%, black 55%, transparent 100%);
+    mask-image:radial-gradient(ellipse 56% 62% at 50% 40%, black 55%, transparent 100%);
+  }
   .hero-spotlight{
     position:absolute; inset:0; z-index:0; pointer-events:none;
     background-image:
@@ -195,7 +199,7 @@
   .beyond strong{ color:var(--text); font-weight:500; }
 
   /* contact — minimal, per spec: just "Contact Me" + redirect links */
-  .contact-section{ text-align:center; padding:160px 0; }
+  .contact-section{ text-align:center; padding:90px 0; }
   .contact-mega{ font-size:clamp(46px,9vw,120px); font-weight:700; letter-spacing:-0.02em; text-transform:uppercase; color:var(--text); }
   .contact-links{ display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:52px; }
   .clink{ font-family:'Space Mono', monospace; font-size:12.5px; padding:13px 24px; border:1px solid var(--line); border-radius:999px; transition:.25s; letter-spacing:0.04em; }
@@ -222,7 +226,7 @@
     <a href="#work" data-target="work">Work</a>
     <a href="#experience" data-target="experience">Experience</a>
     <a href="#recognition" data-target="recognition">Recognition</a>
-    <a href="#contact" data-target="contact">Contact</a>
+    <a href="#contact" data-target="contact">Let's Talk</a>
   </div>
   <div class="topnav-actions">
     <a class="icon-btn" href="mailto:abrahamjosephxd@gmail.com" aria-label="Email Abraham"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l9 7 9-7M3 6h18v12H3z" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -242,7 +246,7 @@
     <li><a href="#experience" data-target="experience"><span class="idx">03</span><span class="lbl">Experience</span></a></li>
     <li><a href="#recognition" data-target="recognition"><span class="idx">04</span><span class="lbl">Recognition</span></a></li>
     <li><a href="#writing" data-target="writing"><span class="idx">05</span><span class="lbl">Writing</span></a></li>
-    <li><a href="#contact" data-target="contact"><span class="idx">06</span><span class="lbl">Contact</span></a></li>
+    <li><a href="#contact" data-target="contact"><span class="idx">06</span><span class="lbl">Let's Talk</span></a></li>
   </ol>
 </aside>
 
@@ -488,7 +492,7 @@
 
 <section class="section contact-section" id="contact">
   <div class="wrap reveal">
-    <h2 class="contact-mega">Contact Me</h2>
+    <h2 class="contact-mega">Let's Talk.</h2>
     <div class="contact-links">
       <a class="clink" href="mailto:abrahamjosephxd@gmail.com">Email</a>
       <a class="clink" href="https://www.linkedin.com/in/-abrahamjoseph/" target="_blank" rel="noopener">LinkedIn</a>
