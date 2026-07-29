@@ -17,6 +17,7 @@
     --text-dim:#8f8f8a;
     --text-faint:#4d4d49;
     --accent:#d9a441;
+    --hero-red:#e2432f;
     --line:#212120;
     --radius-card:16px;
     --maxw:1400px;
@@ -56,10 +57,10 @@
   @media (max-width:560px){ .icon-btn:nth-child(2){ display:none; } }
 
   /* ===== persistent CV button — fixed bottom-left ===== */
-  .cv-float{ position:fixed; left:24px; bottom:24px; z-index:80; display:flex; align-items:center; gap:8px; padding:13px 18px; border-radius:999px; background:var(--text); color:var(--ink); font-family:'Space Mono', monospace; font-size:11.5px; font-weight:700; letter-spacing:.03em; box-shadow:0 20px 40px -18px rgba(0,0,0,.8); transition:background .25s, transform .25s; }
+  .cv-float{ position:fixed; left:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:200; display:flex; align-items:center; gap:8px; padding:13px 18px; border-radius:999px; background:var(--text); color:var(--ink); font-family:'Space Mono', monospace; font-size:11.5px; font-weight:700; letter-spacing:.03em; box-shadow:0 20px 40px -18px rgba(0,0,0,.9); transition:background .25s, transform .25s; }
   .cv-float:hover{ background:var(--accent); transform:translateY(-2px); }
-  .cv-float svg{ width:13px; height:13px; }
-  @media (max-width:560px){ .cv-float span{ display:none; } .cv-float{ padding:13px; } }
+  .cv-float svg{ width:13px; height:13px; flex-shrink:0; }
+  @media (max-width:560px){ .cv-float{ padding:11px 14px; font-size:10.5px; gap:6px; } }
 
   /* ===== left vertical section nav (wide screens only) ===== */
   .side-nav{ position:fixed; left:40px; top:50%; transform:translateY(-50%); z-index:40; }
@@ -109,11 +110,11 @@
   .eyebrow-row{ display:flex; align-items:center; justify-content:flex-start; gap:14px; margin-bottom:16px; font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-dim); }
   .eyebrow-row .rule{ height:1px; width:52px; background:var(--line); }
   h1.name{ font-size:clamp(42px, 6.4vw, 88px); font-weight:700; line-height:0.98; letter-spacing:-0.02em; text-transform:uppercase; color:var(--text); }
-  .role-line{ margin-top:12px; font-size:clamp(16px,1.8vw,21px); color:var(--text-dim); font-weight:300; max-width:620px; }
+  .role-line{ margin-top:12px; font-size:clamp(16px,1.8vw,21px); color:var(--hero-red); font-weight:700; max-width:620px; }
   .hero-divider{ width:1px; height:26px; background:var(--line); margin:18px 0; }
   .hero-stats-row{ display:flex; gap:36px; flex-wrap:wrap; }
   .hero-stats-row .stat{ display:flex; flex-direction:column; gap:5px; }
-  .hero-stats-row .num{ font-family:'Space Mono', monospace; font-weight:700; font-size:clamp(24px,3vw,32px); color:var(--accent); line-height:1; }
+  .hero-stats-row .num{ font-family:'Space Mono', monospace; font-weight:700; font-size:clamp(24px,3vw,32px); color:var(--hero-red); line-height:1; }
   .hero-stats-row .label{ font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-dim); }
   .hero-line{ font-family:'Space Mono', monospace; font-size:14.5px; letter-spacing:.06em; color:var(--text); }
   .hero-line.dim{ margin-top:14px; color:var(--text-dim); font-size:14px; }
@@ -176,6 +177,19 @@
   .tl-item h4{ font-size:17px; font-weight:600; }
   .tl-item .org{ color:var(--text-dim); font-size:13.5px; margin-top:2px; }
   .tl-item p{ color:var(--text-dim); font-size:15px; margin-top:8px; line-height:1.7; max-width:68ch; }
+  .tl-item-split{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; }
+  .tl-item-split .tl-text{ flex:1; min-width:220px; }
+  .tl-photo-box{
+    display:flex; gap:6px; padding:8px; border:1px solid var(--line); border-radius:12px;
+    background:var(--ink-3); transition:.3s; position:relative; flex-shrink:0;
+  }
+  .tl-photo-box:hover{ border-color:var(--accent); transform:translateY(-2px); }
+  .tl-photo-box img{ width:66px; height:66px; object-fit:cover; border-radius:8px; filter:grayscale(0.4) contrast(1.05); }
+  .tl-photo-box .tl-photo-cta{
+    position:absolute; bottom:-22px; left:0; right:0; text-align:center;
+    font-family:'Space Mono', monospace; font-size:10px; color:var(--text-faint); opacity:0; transition:.3s;
+  }
+  .tl-photo-box:hover .tl-photo-cta{ opacity:1; color:var(--accent); }
 
   /* recognition */
   .award-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
@@ -280,7 +294,7 @@
       <div class="hero-divider"></div>
       <div class="hero-stats-row">
         <div class="stat"><span class="num">7+</span><span class="label">Institutions Taught At</span></div>
-        <div class="stat"><span class="num">100+</span><span class="label">Students / Session</span></div>
+        <div class="stat"><span class="num">400+</span><span class="label">Students Taught</span></div>
         <div class="stat"><span class="num">3</span><span class="label">Hackathon Wins</span></div>
         <div class="stat"><span class="num">4</span><span class="label">Internships Shipped</span></div>
       </div>
@@ -415,20 +429,34 @@
       <div class="timeline reveal">
         <div class="tl-group-label">Internships</div>
         <div class="tl-item">
-          <div class="when">Jun – Aug 2025<br>Hybrid</div>
-          <div><h4>Robotics &amp; IoT Intern</h4><div class="org">Nest Digital · Infopark, Kakkanad</div><p>Embedded hardware integration and smart system deployments. Worked across IoT sensor pipelines and robotics automation workflows in a hybrid capacity at Infopark Kochi.</p></div>
-        </div>
-        <div class="tl-item">
           <div class="when">Jun – Aug 2025<br>PM Vikas</div>
           <div><h4>IoT &amp; Robotics Intern</h4><div class="org">IIIT Kottayam · Govt. of India Initiative</div><p>Selected for the PM Vikas government-backed skill development programme at IIIT Kottayam. Two-month intensive in IoT and robotics engineering fundamentals and applied projects.</p></div>
         </div>
         <div class="tl-item">
-          <div class="when">Jul – Oct 2024</div>
-          <div><h4>Embedded &amp; Robotics Intern</h4><div class="org">TORCEDU · Kochi</div><p>C++ development for real-time embedded systems, hardware debugging, and hardware-software interface design on TIVA C and Arduino. End-to-end project ownership from KiCad schematic to deployed firmware.</p></div>
+          <div class="when">Jun – Aug 2025<br>Hybrid</div>
+          <div class="tl-item-split">
+            <div class="tl-text"><h4>Robotics &amp; IoT Intern</h4><div class="org">Nest Digital · Infopark, Kakkanad</div><p>Embedded hardware integration and smart system deployments. Worked across IoT sensor pipelines and robotics automation workflows in a hybrid capacity at Infopark Kochi.</p></div>
+            <a class="tl-photo-box" href="https://nestdigital.com/" target="_blank" rel="noopener" aria-label="Visit NeST Digital website">
+              <img src="assets/nest-badge.jpg" alt="Abraham Joseph's trainee badge outside NeST Tech Park">
+              <img src="assets/nest-certificate.jpg" alt="Abraham Joseph's NeST Digital Academy completion certificate">
+              <span class="tl-photo-cta">nestdigital.com ↗</span>
+            </a>
+          </div>
         </div>
         <div class="tl-item">
           <div class="when">2024</div>
           <div><h4>Robotics &amp; IoT Intern</h4><div class="org">CSEED</div><p>Production-ready robotics layouts, IoT systems with GSM/WiFi communication, and embedded control applications from sensor node to cloud.</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="when">Jul – Oct 2024</div>
+          <div class="tl-item-split">
+            <div class="tl-text"><h4>Embedded &amp; Robotics Intern</h4><div class="org">TORCEDU · Kochi</div><p>C++ development for real-time embedded systems, hardware debugging, and hardware-software interface design on TIVA C and Arduino. End-to-end project ownership from KiCad schematic to deployed firmware.</p></div>
+            <a class="tl-photo-box" href="https://torcedu.com/" target="_blank" rel="noopener" aria-label="Visit TORCEDU website">
+              <img src="assets/torcedu-building.jpg" alt="TORCEDU office building, Kochi">
+              <img src="assets/torcedu-session.jpg" alt="TORCEDU training session">
+              <span class="tl-photo-cta">torcedu.com ↗</span>
+            </a>
+          </div>
         </div>
 
         <div class="tl-group-label">Leadership &amp; Community</div>

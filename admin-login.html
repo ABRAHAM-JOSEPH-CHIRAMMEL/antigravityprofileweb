@@ -62,10 +62,6 @@
 
     <form id="loginForm">
       <div class="field">
-        <label for="email">Email</label>
-        <input id="email" type="email" autocomplete="username" required>
-      </div>
-      <div class="field">
         <label for="password">Password</label>
         <input id="password" type="password" autocomplete="current-password" required>
       </div>
@@ -86,6 +82,7 @@
 <script>
   const SUPABASE_URL = "https://lnihafgnujxdcmhwjrhc.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxuaWhhZmdudWp4ZGNtaHdqcmhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1MjAzMDEsImV4cCI6MjEwMDA5NjMwMX0.TSYxT_C-mDZ6n-WGIzoHDsCzxss_XIx0_SFiwbWxkUo";
+  const ADMIN_EMAIL = "abrahamjosephxd@gmail.com"; // single-admin site — email is fixed, only password is asked
 
   const notConfigured = SUPABASE_URL.indexOf("YOUR_SUPABASE") === 0;
   if (notConfigured) {
@@ -110,10 +107,9 @@
     msg.textContent = ''; msg.className = 'msg';
     btn.disabled = true; btn.textContent = 'Logging in…';
 
-    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
 
-    const { error } = await client.auth.signInWithPassword({ email, password });
+    const { error } = await client.auth.signInWithPassword({ email: ADMIN_EMAIL, password });
 
     btn.disabled = false; btn.textContent = 'Log In';
 
@@ -131,14 +127,8 @@
     e.preventDefault();
     if (!client) return;
     const msg = document.getElementById('msg');
-    const email = document.getElementById('email').value.trim();
-    if (!email) {
-      msg.textContent = 'Enter your email above first, then click "Forgot password?"';
-      msg.className = 'msg error';
-      return;
-    }
     const resetUrl = window.location.href.replace('admin-login.html', 'reset-password.html');
-    const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo: resetUrl });
+    const { error } = await client.auth.resetPasswordForEmail(ADMIN_EMAIL, { redirectTo: resetUrl });
     if (error) {
       msg.textContent = error.message;
       msg.className = 'msg error';
