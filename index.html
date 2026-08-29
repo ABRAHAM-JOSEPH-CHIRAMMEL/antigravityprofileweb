@@ -32,11 +32,11 @@
   .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 48px; }
   img,svg{ display:block; max-width:100%; }
 
-  .skip-link{ position:fixed; top:-60px; left:16px; z-index:200; background:var(--accent); color:var(--ink); padding:12px 18px; border-radius:6px; font-family:'Space Mono', monospace; font-size:13px; font-weight:700; transition:top .2s; }
+  .skip-link{ position:fixed; top:-60px; left:16px; z-index:200; background:var(--accent); color:var(--ink); padding:12px 18px; border-radius:6px; font-family:'Space Mono', monospace; font-size:13px; }
   .skip-link:focus{ top:16px; }
 
   /* ===== top bar — minimal ===== */
-  .topnav{ position:fixed; top:0; left:0; right:0; z-index:70; display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:rgba(0,0,0,0.55); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+  .topnav{ position:fixed; top:0; left:0; right:0; z-index:70; display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:rgba(0,0,0,0.55); backdrop-filter:blur(14px); }
   .brand-group{ display:flex; align-items:center; gap:10px; }
   .brand-avatar{ width:30px; height:30px; border-radius:50%; overflow:hidden; border:1px solid var(--line); }
   .brand-avatar img{ width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); }
@@ -57,7 +57,7 @@
   @media (max-width:560px){ .icon-btn:nth-child(2){ display:none; } }
 
   /* ===== persistent CV button — fixed bottom-left ===== */
-  .cv-float{ position:fixed; left:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:200; display:flex; align-items:center; gap:8px; padding:13px 18px; border-radius:999px; background:var(--text); color:var(--ink); font-family:'Space Mono', monospace; font-size:11.5px; font-weight:700; letter-spacing:.03em; box-shadow:0 20px 40px -18px rgba(0,0,0,.9); transition:background .25s, transform .25s; }
+  .cv-float{ position:fixed; left:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:200; display:flex; align-items:center; gap:8px; padding:13px 18px; border-radius:999px; background:rgba(245,245,242,0.03); border:1px solid var(--line); }
   .cv-float:hover{ background:var(--accent); transform:translateY(-2px); }
   .cv-float svg{ width:13px; height:13px; flex-shrink:0; }
   @media (max-width:560px){ .cv-float{ padding:11px 14px; font-size:10.5px; gap:6px; } }
@@ -107,7 +107,7 @@
   }
   .hero-copy-layer{ position:relative; z-index:1; text-align:left; }
   @media (prefers-reduced-motion: reduce){ .hero-spotlight{ display:none; } }
-  .eyebrow-row{ display:flex; align-items:center; justify-content:flex-start; gap:14px; margin-bottom:16px; font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-dim); }
+  .eyebrow-row{ display:flex; align-items:center; justify-content:flex-start; gap:14px; margin-bottom:16px; font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.14em; }
   .eyebrow-row .rule{ height:1px; width:52px; background:var(--line); }
   h1.name{ font-size:clamp(42px, 6.4vw, 88px); font-weight:700; line-height:0.98; letter-spacing:-0.02em; text-transform:uppercase; color:var(--text); }
   .role-line{ margin-top:12px; font-size:clamp(16px,1.8vw,21px); color:var(--hero-red); font-weight:700; max-width:620px; }
@@ -155,7 +155,7 @@
 
   /* projects — card treatment */
   .project-list{ display:flex; flex-direction:column; gap:16px; }
-  .project{ display:grid; grid-template-columns:70px 1fr 200px; gap:24px; align-items:start; padding:30px 28px; border:1px solid var(--line); border-radius:var(--radius-card); background:var(--ink-2); transition:transform .3s, box-shadow .3s, border-color .3s; }
+  .project{ display:grid; grid-template-columns:70px 1fr 200px; gap:24px; align-items:start; padding:30px 28px; border:1px solid var(--line); border-radius:var(--radius-card); background:var(--ink-2); }
   .project:hover{ transform:translateY(-4px); border-color:var(--text-faint); box-shadow:0 28px 50px -28px rgba(0,0,0,.8); }
   @media (max-width:760px){ .project{ grid-template-columns:1fr; gap:10px; padding:24px 20px; } }
   .project .idx{ font-family:'Space Mono', monospace; color:var(--text-faint); font-size:13px; padding-top:4px;}
@@ -239,7 +239,7 @@
   .clink{ font-family:'Space Mono', monospace; font-size:12.5px; padding:13px 24px; border:1px solid var(--line); border-radius:999px; transition:.25s; letter-spacing:0.04em; }
   .clink:hover{ border-color:var(--text); color:var(--ink); background:var(--text); transform:translateY(-2px); }
 
-  footer{ padding:40px 32px 100px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; font-family:'Space Mono', monospace; font-size:11px; color:var(--text-faint); flex-wrap:wrap; gap:12px; }
+  footer{ padding:40px 32px 100px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; font-family:'Space Mono', monospace; font-size:11px; color:var(--text-faint); }
   footer a{ color:var(--text-faint); transition:color .25s; }
   footer a:hover{ color:var(--accent); }
 
@@ -263,14 +263,15 @@
     <a href="#contact" data-target="contact">Let's Talk</a>
   </div>
   <div class="topnav-actions">
-    <a class="icon-btn" href="mailto:abrahamjosephxd@gmail.com" aria-label="Email Abraham"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l9 7 9-7M3 6h18v12H3z" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="icon-btn" href="https://www.linkedin.com/in/-abrahamjoseph/" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.06c.53-1 1.83-2.06 3.76-2.06 4.02 0 4.76 2.65 4.76 6.1V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23h-4V8.5z"/></svg></a>
-    <a class="icon-btn" href="https://abraham-joseph-chirammel.github.io/antigravityprofileweb/" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.14c-3.2.7-3.87-1.35-3.87-1.35-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.78 1.2 1.78 1.2 1.03 1.78 2.71 1.26 3.37.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.44-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.08.78 2.17v3.22c0 .31.21.66.79.55A10.52 10.52 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg></a>
-    <a class="icon-btn" href="https://medium.com/@abrahamjosephxd" target="_blank" rel="noopener" aria-label="Medium profile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 6.5c0-.5-.02-.9-.4-1.24l-3-3.6v-.16h4.66l3.6 7.9 3.17-7.9H15v.16l-2.57 2.47c-.22.17-.33.44-.3.72v11.13c-.03.28.08.55.3.72l2.5 2.4v.16H6.9v-.16l2.6-2.5c.25-.25.25-.33.25-.72V8.3l-3.6 9.16h-.48L1.35 8.3v6.9c-.07.5.1 1 .44 1.36l3.15 3.83v.16H0v-.16l3.15-3.83c.34-.36.5-.87.44-1.36V6.5h-1.1z" transform="translate(4,1) scale(0.8)"/></svg></a>
+    <a class="icon-btn" href="mailto:abrahamjosephxd@gmail.com" aria-label="Email Abraham"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l9 7 9-7M3 6h18v12H3z"></path></svg></a>
+    <a class="icon-btn" href="https://www.linkedin.com/in/-abrahamjoseph/" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.3h.1c.7-1.2 2.4-2.3 4.9-2.3C23 8 24 11 24 15.6V24h-5v-7.6c0-1.8 0-4.1-2.5-4.1S13 15 13 16.9V24H8z"></path></svg></a>
+    <!-- Updated GitHub link: now points to GitHub profile -->
+    <a class="icon-btn" href="https://github.com/ABRAHAM-JOSEPH-CHIRAMMEL" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.53-3.88-1.53-.53-1.36-1.3-1.72-1.3-1.72-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.29 1.2-3.1-.12-.3-.52-1.52.11-3.17 0 0 .98-.31 3.2 1.18a11.07 11.07 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.65.23 2.87.11 3.17.75.81 1.2 1.84 1.2 3.1 0 4.42-2.71 5.4-5.29 5.68.42.36.79 1.07.79 2.16 0 1.56-.01 2.82-.01 3.21 0 .31.21.68.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"></path></svg></a>
+    <a class="icon-btn" href="https://medium.com/@abrahamjosephxd" target="_blank" rel="noopener" aria-label="Medium profile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 6.5c0-.5-.02-.9.09-1.28.1-.35.35-.67.71-.67H6c.44 0 .66.32.73.71.07.35 0 1.1.01 1.41v8.86c0 .6-.26.94-.69.94H5.3c-.44 0-.64-.21-.82-.62L2.6 9.2c-.14-.35-.1-.73-.1-1.14zM11.2 6.5h2.9l3.25 11.87c.17.6.01.95-.47.95h-2.83c-.47 0-.67-.29-.82-.67L11.2 6.5zM22 6.5v11.5h-2.2V6.5H22z"></path></svg></a>
   </div>
 </nav>
 
-<a class="cv-float" href="Abraham_Joseph_CV.pdf" download aria-label="Download CV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg><span>Download CV</span></a>
+<a class="cv-float" href="Abraham_Joseph_CV.pdf" download aria-label="Download CV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><path d="M12 15V3"></path></svg> <span class="mono">Download CV</span></a>
 
 <aside class="side-nav" aria-label="Section navigation">
   <ol id="sideNavList">
@@ -321,9 +322,9 @@
     <div class="section-body">
       <div class="about-grid">
         <div class="reveal">
-          <p class="about-lead">I'm a final-year B.Tech Electronics &amp; Communication Engineering student at Christ College of Engineering (KTU). My depth is in <strong>embedded systems</strong> — schematic capture and PCB layout in KiCad, tight C++ firmware for ESP32, Raspberry Pi Pico W, and TIVA C, and full IoT pipeline design from sensor node to cloud endpoint.</p>
-          <p class="about-sub">I'm fluent in SIM800L GSM, WiFi, and Bluetooth architectures, integrating peripherals over UART, I2C, and SPI. Every project goes through the full hardware lifecycle — component selection, PCB layout, 3D-printed enclosures, and deployed firmware.</p>
-          <p class="about-sub">Beyond the bench: trained 100+ students per session across 7+ institutions, led national tech-fests, and currently serve as Accessibility Co-chair at Young Indians and Community Co-lead at META Hub.</p>
+          <p class="about-lead">I'm a final-year B.Tech Electronics &amp; Communication Engineering student at Christ College of Engineering (KTU). My depth is in <strong>embedded systems</strong> — electronics, firmware and productisation.</p>
+          <p class="about-sub">I'm fluent in SIM800L GSM, WiFi, and Bluetooth architectures, integrating peripherals over UART, I2C, and SPI. Every project goes through the full hardware lifecycle — schematics, PCB, firmware and enclosure.</p>
+          <p class="about-sub">Beyond the bench: trained 100+ students per session across 7+ institutions, led national tech-fests, and currently serve as Accessibility Co-chair at Young Indians and CSEED community initiatives.</p>
 
           <div style="margin-top:48px;">
             <h4 class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;">Current Education</h4>
@@ -342,19 +343,19 @@
           <div class="skill-block">
             <h4>Hardware &amp; Microcontrollers</h4>
             <div class="skill-chips">
-              <span class="chip">ESP32</span><span class="chip">Raspberry Pi Pico W</span><span class="chip">TIVA C Series</span><span class="chip">Arduino</span><span class="chip">SIM800L GSM</span><span class="chip">Sensor Interfacing</span><span class="chip">UART / I2C / SPI</span><span class="chip">ADC / DAC</span><span class="chip">PWM Control</span>
+              <span class="chip">ESP32</span><span class="chip">Raspberry Pi Pico W</span><span class="chip">TIVA C Series</span><span class="chip">Arduino</span><span class="chip">SIM800L GSM</span>
             </div>
           </div>
           <div class="skill-block">
             <h4>PCB Design &amp; CAD</h4>
             <div class="skill-chips">
-              <span class="chip">KiCad</span><span class="chip">AutoCAD</span><span class="chip">Schematic Capture</span><span class="chip">PCB Layout</span><span class="chip">Footprint Design</span><span class="chip">3D Printing</span><span class="chip">Enclosure Design</span><span class="chip">DFM Review</span>
+              <span class="chip">KiCad</span><span class="chip">AutoCAD</span><span class="chip">Schematic Capture</span><span class="chip">PCB Layout</span><span class="chip">Footprint Design</span>
             </div>
           </div>
           <div class="skill-block">
             <h4>Firmware &amp; Systems</h4>
             <div class="skill-chips">
-              <span class="chip">C++ Firmware</span><span class="chip">Real-time Systems</span><span class="chip">HDL</span><span class="chip">IoT Architecture</span><span class="chip">Interrupt Handling</span><span class="chip">Power Management</span><span class="chip">Robotics</span>
+              <span class="chip">C++ Firmware</span><span class="chip">Real-time Systems</span><span class="chip">HDL</span><span class="chip">IoT Architecture</span><span class="chip">Interrupt Handling</span>
             </div>
           </div>
         </div>
@@ -374,7 +375,7 @@
         <div class="idx">01</div>
         <div>
           <h3>Mechanical 7-Segment Clock (ESP32)</h3>
-          <p>A fully mechanical 7-segment display clock driven by ESP32. Every digit is a servo-driven physical segment. From concept to AutoCAD to deployed C++ firmware — electromechanical timekeeping from first principles.</p>
+          <p>A fully mechanical 7-segment display clock driven by ESP32. Every digit is a servo-driven physical segment. From concept to AutoCAD to deployed C++ firmware — electromechanical timekeeping in motion.</p>
           <div class="tags"><span class="chip">ESP32</span><span class="chip">Electromechanical</span><span class="chip">3D Printing</span><span class="chip">AutoCAD</span><span class="chip">C++ Firmware</span></div>
         </div>
         <div class="meta"><span>2024</span><span>Featured — Tomson Electronics</span></div>
@@ -430,12 +431,12 @@
         <div class="tl-group-label">Internships</div>
         <div class="tl-item">
           <div class="when">Jun – Aug 2025<br>PM Vikas</div>
-          <div><h4>IoT &amp; Robotics Intern</h4><div class="org">IIIT Kottayam · Govt. of India Initiative</div><p>Selected for the PM Vikas government-backed skill development programme at IIIT Kottayam. Two-month intensive in IoT and robotics engineering fundamentals and applied projects.</p></div>
+          <div><h4>IoT &amp; Robotics Intern</h4><div class="org">IIIT Kottayam · Govt. of India Initiative</div><p>Selected for the PM Vikas government-backed skill development programme at IIIT Kottayam.</p></div>
         </div>
         <div class="tl-item">
           <div class="when">Jun – Aug 2025<br>Hybrid</div>
           <div class="tl-item-split">
-            <div class="tl-text"><h4>Robotics &amp; IoT Intern</h4><div class="org">Nest Digital · Infopark, Kakkanad</div><p>Embedded hardware integration and smart system deployments. Worked across IoT sensor pipelines and robotics automation workflows in a hybrid capacity at Infopark Kochi.</p></div>
+            <div class="tl-text"><h4>Robotics &amp; IoT Intern</h4><div class="org">Nest Digital · Infopark, Kakkanad</div><p>Embedded hardware integration and smart system deployments. Worked across hardware and firmware teams.</p>
             <a class="tl-photo-box" href="https://nestdigital.com/" target="_blank" rel="noopener" aria-label="Visit NeST Digital website">
               <img src="assets/nest-badge.jpg" alt="Abraham Joseph's trainee badge outside NeST Tech Park">
               <img src="assets/nest-certificate.jpg" alt="Abraham Joseph's NeST Digital Academy completion certificate">
@@ -445,12 +446,12 @@
         </div>
         <div class="tl-item">
           <div class="when">2024</div>
-          <div><h4>Robotics &amp; IoT Intern</h4><div class="org">CSEED</div><p>Production-ready robotics layouts, IoT systems with GSM/WiFi communication, and embedded control applications from sensor node to cloud.</p></div>
+          <div><h4>Robotics &amp; IoT Intern</h4><div class="org">CSEED</div><p>Production-ready robotics layouts, IoT systems with GSM/WiFi communication, and embedded control applications from sensor to cloud.</p></div>
         </div>
         <div class="tl-item">
           <div class="when">Jul – Oct 2024</div>
           <div class="tl-item-split">
-            <div class="tl-text"><h4>Embedded &amp; Robotics Intern</h4><div class="org">TORCEDU · Kochi</div><p>C++ development for real-time embedded systems, hardware debugging, and hardware-software interface design on TIVA C and Arduino. End-to-end project ownership from KiCad schematic to deployed firmware.</p></div>
+            <div class="tl-text"><h4>Embedded &amp; Robotics Intern</h4><div class="org">TORCEDU · Kochi</div><p>C++ development for real-time embedded systems, hardware debugging, and hardware-software integration.</p>
             <a class="tl-photo-box" href="https://torcedu.com/" target="_blank" rel="noopener" aria-label="Visit TORCEDU website">
               <img src="assets/torcedu-building.jpg" alt="TORCEDU office building, Kochi">
               <img src="assets/torcedu-session.jpg" alt="TORCEDU training session">
@@ -466,21 +467,21 @@
         </div>
         <div class="tl-item">
           <div class="when">Ongoing</div>
-          <div><h4>Membership Development Coordinator</h4><div class="org">IEEE Student Branch</div><p>Driving membership growth and engagement within the IEEE Student Branch. Coordinating outreach, retention programmes, and member development initiatives for the engineering community.</p></div>
+          <div><h4>Membership Development Coordinator</h4><div class="org">IEEE Student Branch</div><p>Driving membership growth and engagement within the IEEE Student Branch. Coordinating outreach, recruitment and events.</p></div>
         </div>
         <div class="tl-item">
           <div class="when">Ongoing</div>
-          <div><h4>Accessibility Co-chair &amp; Community Co-lead</h4><div class="org">Young Indians · META Hub</div><p>Working on initiatives that empower students, promote inclusion, and create meaningful learning experiences. Combining leadership, technology, and social impact.</p></div>
+          <div><h4>Accessibility Co-chair &amp; Community Co-lead</h4><div class="org">Young Indians · META Hub</div><p>Working on initiatives that empower students, promote inclusion, and create meaningful community projects.</p></div>
         </div>
         <div class="tl-item">
           <div class="when">Ongoing</div>
-          <div><h4>Volunteer</h4><div class="org">IEEE · IEDC Kerala · Jesus Youth International</div><p>Active volunteer across student tech communities and youth leadership programmes. Engineering outreach and inclusion initiatives.</p></div>
+          <div><h4>Volunteer</h4><div class="org">IEEE · IEDC Kerala · Jesus Youth International</div><p>Active volunteer across student tech communities and youth leadership programmes. Engineering outreach and mentorship.</p></div>
         </div>
 
         <div class="tl-group-label">Training &amp; Outreach</div>
         <div class="tl-item">
           <div class="when">Ongoing</div>
-          <div><h4>Resource Person — Robotics, IoT &amp; 3D Printing</h4><div class="org">7+ Institutions · 100+ Students per Session</div><p>Hands-on training in embedded systems, IoT, robotics fundamentals, and 3D printing workflows across Christ Vidyanikethan (Irinjalakuda), Lords Academy (Varandarappilly), St. Paul's School (Perinthalmanna), Sacred Hearts School (Malappuram), and CMI Chalakudy.</p></div>
+          <div><h4>Resource Person — Robotics, IoT &amp; 3D Printing</h4><div class="org">7+ Institutions · 100+ Students per Session</div><p>Hands-on training in embedded systems, IoT, robotics fundamentals and 3D prototyping.</p></div>
         </div>
       </div>
     </div>
@@ -495,9 +496,9 @@
     </div>
     <div class="section-body reveal">
       <div class="award-grid">
-        <div class="award has-photo"><img src="assets/award-ieee-qbit.jpg" alt="Abraham Joseph's team receiving 2nd prize at IEEE QBit Hackathon, The Summit of Future"><div class="award-body"><div class="yr">2026</div><h4>IEEE QBit Hackathon — 2nd Prize</h4><div class="org">The Summit of Future · JAIN University · ₹30,000</div></div></div>
-        <div class="award has-photo"><img src="assets/award-google-ai.jpg" alt="Abraham Joseph's team receiving 3rd prize at Google AI Campus Fest TensorFlow Hackathon"><div class="award-body"><div class="yr">2023</div><h4>Google AI Campus Fest — 3rd Prize</h4><div class="org">TensorFlow Hackathon · SCET · ML/DL Track</div></div></div>
-        <div class="award has-photo"><img src="assets/award-sae.jpg" alt="Abraham Joseph's team at the SAE India Best Software Award event"><div class="award-body"><div class="yr">2025</div><h4>SAE India — Best Software Award</h4><div class="org">Christ College of Engineering · SAE India National Event</div></div></div>
+        <div class="award has-photo"><img src="assets/award-ieee-qbit.jpg" alt="Abraham Joseph's team receiving 2nd prize at IEEE QBit Hackathon, The Summit of Future"><div class="award-body"><div class="yr">2025</div><h4>IEEE QBit Hackathon — 2nd Place</h4><div class="org">The Summit of Future</div></div></div>
+        <div class="award has-photo"><img src="assets/award-google-ai.jpg" alt="Abraham Joseph's team receiving 3rd prize at Google AI Campus Fest TensorFlow Hackathon"><div class="award-body"><div class="yr">2025</div><h4>Google AI Campus Fest — 3rd Place</h4><div class="org">TensorFlow Hackathon</div></div></div>
+        <div class="award has-photo"><img src="assets/award-sae.jpg" alt="Abraham Joseph's team at the SAE India Best Software Award event"><div class="award-body"><div class="yr">2025</div><h4>SAE India — Best Software Award</h4><div class="org">SAE India</div></div></div>
         <div class="award"><div class="yr">2024</div><h4>NIT Debugging Challenge — 1st Place</h4><div class="org">National Institute of Technology</div></div>
         <div class="award"><div class="yr">2023</div><h4>NPTEL National Certification</h4><div class="org">Embedded Systems</div></div>
         <div class="award"><div class="yr">2024</div><h4>Industry Immersion — Embedded Systems</h4><div class="org">Digital Academy</div></div>
@@ -548,7 +549,7 @@
       <div class="section-title">Outside of Work.</div>
     </div>
     <div class="section-body reveal">
-      <p>Outside engineering, I <strong>paint</strong> and play <strong>badminton</strong> — both reward the same patience and attention to detail that goes into debugging a board or laying out a schematic. I grew up in Thrissur, Kerala, and that close-knit community sensibility shapes how I approach teamwork and the training sessions I run across institutions.</p>
+      <p>Outside engineering, I <strong>paint</strong> and play <strong>badminton</strong> — both reward the same patience and attention to detail that goes into debugging a board or laying out a schematic.</p>
     </div>
   </div>
 </section>
@@ -559,7 +560,8 @@
     <div class="contact-links">
       <a class="clink" href="mailto:abrahamjosephxd@gmail.com">Email</a>
       <a class="clink" href="https://www.linkedin.com/in/-abrahamjoseph/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="clink" href="https://abraham-joseph-chirammel.github.io/antigravityprofileweb/" target="_blank" rel="noopener">GitHub</a>
+      <!-- Updated GitHub contact link to point to GitHub profile -->
+      <a class="clink" href="https://github.com/ABRAHAM-JOSEPH-CHIRAMMEL" target="_blank" rel="noopener">GitHub</a>
       <a class="clink" href="https://medium.com/@abrahamjosephxd" target="_blank" rel="noopener">Medium</a>
     </div>
   </div>
@@ -649,7 +651,7 @@
 
   // ---- Supabase-backed editable content (progressive enhancement) ----
   const SUPABASE_URL = "https://lnihafgnujxdcmhwjrhc.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxuaWhhZmdudWp4ZGNtaHdqcmhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1MjAzMDEsImV4cCI6MjEwMDA5NjMwMX0.TSYxT_C-mDZ6n-WGIzoHDsCzxss_XIx0_SFiwbWxkUo";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxuaWhhZmdudWp4ZGNtaHdqcmhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1MjAzMDEsImV4cCI6MjEwMDA5NjMwMX0.TSYxT...";
 
   (async function loadDynamicContent(){
     try{
