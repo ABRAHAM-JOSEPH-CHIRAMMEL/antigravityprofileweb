@@ -57,10 +57,9 @@
   @media (max-width:560px){ .icon-btn:nth-child(2){ display:none; } }
 
   /* ===== persistent CV button — fixed bottom-left ===== */
-  .cv-float{ position:fixed; left:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:200; display:flex; align-items:center; gap:8px; padding:13px 18px; border-radius:999px; background:rgba(245,245,242,0.03); border:1px solid var(--line); }
-  .cv-float:hover{ background:var(--accent); transform:translateY(-2px); }
-  .cv-float svg{ width:13px; height:13px; flex-shrink:0; color:var(--accent); }
-  .cv-float:hover svg{ color:var(--ink); }
+  .cv-float{ position:fixed; left:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:200; display:flex; align-items:center; gap:8px; padding:13px 18px; border-radius:999px; background:var(--accent); border:1px solid var(--accent); color:var(--ink); }
+  .cv-float:hover{ background:#e8b452; border-color:#e8b452; transform:translateY(-2px); }
+  .cv-float svg{ width:13px; height:13px; flex-shrink:0; color:currentColor; }
   @media (max-width:560px){ .cv-float{ padding:11px 14px; font-size:10.5px; gap:6px; } }
 
   /* ===== left vertical section nav (wide screens only) ===== */
