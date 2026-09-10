@@ -167,28 +167,29 @@
   .project .meta a{ color:var(--accent); }
 
   /* experience timeline */
-  .timeline{ position:relative; display:flex; flex-direction:column; gap:12px; }
-  .tl-group-label{ font-family:'Space Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-faint); margin:22px 0 0; }
-  .tl-group-label:first-child{ margin-top:0; }
-  .tl-item{ display:grid; grid-template-columns:160px minmax(0,1fr); gap:22px; padding:20px 22px; border:1px solid var(--line); border-radius:12px; background:var(--ink-2); transition:.3s; }
-  .tl-item:hover{ border-color:var(--text-faint); background:var(--ink-3); }
+  .timeline{ display:flex; flex-direction:column; gap:34px; }
+  .experience-group{ border-top:1px solid var(--line); padding-top:16px; }
+  .experience-group:first-child{ border-top:0; padding-top:0; }
+  .tl-group-label{ font-family:'Space Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); margin:0 0 10px; }
+  .tl-item{ display:grid; grid-template-columns:170px minmax(0,1fr); gap:26px; padding:20px 0; border-top:1px solid var(--line); }
+  .tl-item:first-of-type{ border-top:0; }
+  .tl-item .when{ font-family:'Space Mono', monospace; font-size:12px; line-height:1.65; color:var(--text-faint); padding-top:3px; }
+  .tl-content{ min-width:0; }
+  .tl-item h4{ font-size:18px; font-weight:600; line-height:1.3; }
+  .tl-item .org{ color:var(--text-dim); font-size:14px; margin-top:3px; }
+  .tl-item p{ color:var(--text-dim); font-size:15px; margin-top:9px; line-height:1.65; max-width:72ch; }
+  .tl-item-split{ display:flex; justify-content:space-between; align-items:flex-start; gap:24px; }
+  .tl-item-split .tl-text{ min-width:0; flex:1; }
   @media (max-width:900px){
-    .timeline{ gap:10px; }
-    .tl-group-label{ margin:20px 0 0; }
-    .tl-group-label:first-child{ margin-top:0; }
-    .tl-item{ grid-template-columns:minmax(0, 1fr); gap:6px; padding:18px; }
-    .tl-item .when{ grid-column:1; }
-    .tl-item > :not(.when){ min-width:0; }
-    .tl-item-split{ flex-direction:column; gap:12px; }
-    .tl-item-split .tl-text{ min-width:0; width:100%; }
+    .timeline{ gap:28px; }
+    .tl-item{ grid-template-columns:1fr; gap:5px; padding:18px; border:1px solid var(--line); border-radius:12px; background:var(--ink-2); }
+    .tl-item + .tl-item{ margin-top:10px; }
+    .tl-item:first-of-type{ border-top:1px solid var(--line); }
+    .tl-item .when{ padding:0; }
+    .tl-item-split{ flex-direction:column; gap:14px; }
+    .tl-item-split .tl-text{ width:100%; }
   }
   @media (max-width:480px){ .tl-item{ padding:16px; } }
-  .tl-item .when{ font-family:'Space Mono', monospace; font-size:12px; color:var(--text-faint); }
-  .tl-item h4{ font-size:17px; font-weight:600; }
-  .tl-item .org{ color:var(--text-dim); font-size:13.5px; margin-top:2px; }
-  .tl-item p{ color:var(--text-dim); font-size:15px; margin-top:8px; line-height:1.7; max-width:68ch; }
-  .tl-item-split{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; }
-  .tl-item-split .tl-text{ flex:1; min-width:220px; }
   .tl-photo-box{
     display:flex; gap:6px; padding:8px; border:1px solid var(--line); border-radius:12px;
     background:var(--ink-3); transition:.3s; position:relative; flex-shrink:0;
@@ -438,60 +439,23 @@
     </div>
     <div class="section-body">
       <div class="timeline reveal">
-        <div class="tl-group-label">Internships</div>
-        <div class="tl-item">
-          <div class="when">Jun – Aug 2025<br>PM Vikas</div>
-          <div><h4>IoT &amp; Robotics Intern</h4><div class="org">IIIT Kottayam · Govt. of India Initiative</div><p>Selected for the PM Vikas government-backed skill development programme at IIIT Kottayam.</p></div>
+        <div class="experience-group">
+          <div class="tl-group-label">Internships</div>
+          <div class="tl-item"><div class="when">Jun – Aug 2025<br>PM Vikas</div><div class="tl-content"><h4>IoT &amp; Robotics Intern</h4><div class="org">IIIT Kottayam · Govt. of India Initiative</div><p>Selected for the PM Vikas government-backed skill development programme at IIIT Kottayam.</p></div></div>
+          <div class="tl-item"><div class="when">Jun – Aug 2025<br>Hybrid</div><div class="tl-content tl-item-split"><div class="tl-text"><h4>Robotics &amp; IoT Intern</h4><div class="org">Nest Digital · Infopark, Kakkanad</div><p>Embedded hardware integration and smart system deployments. Worked across hardware and firmware teams.</p></div><a class="tl-photo-box" href="https://nestdigital.com/" target="_blank" rel="noopener" aria-label="Visit NeST Digital website"><img src="assets/nest-badge.jpg" alt="Abraham Joseph's trainee badge outside NeST Tech Park"><img src="assets/nest-certificate.jpg" alt="Abraham Joseph's NeST Digital Academy completion certificate"><span class="tl-photo-cta">nestdigital.com ↗</span></a></div></div>
+          <div class="tl-item"><div class="when">2024</div><div class="tl-content"><h4>Robotics &amp; IoT Intern</h4><div class="org">CSEED</div><p>Production-ready robotics layouts, IoT systems with GSM/WiFi communication, and embedded control applications from sensor to cloud.</p></div></div>
+          <div class="tl-item"><div class="when">Jul – Oct 2024</div><div class="tl-content tl-item-split"><div class="tl-text"><h4>Embedded &amp; Robotics Intern</h4><div class="org">TORCEDU · Kochi</div><p>C++ development for real-time embedded systems, hardware debugging, and hardware-software integration.</p></div><a class="tl-photo-box" href="https://torcedu.com/" target="_blank" rel="noopener" aria-label="Visit TORCEDU website"><img src="assets/torcedu-building.jpg" alt="TORCEDU office building, Kochi"><img src="assets/torcedu-session.jpg" alt="TORCEDU training session"><span class="tl-photo-cta">torcedu.com ↗</span></a></div></div>
         </div>
-        <div class="tl-item">
-          <div class="when">Jun – Aug 2025<br>Hybrid</div>
-          <div class="tl-item-split">
-            <div class="tl-text"><h4>Robotics &amp; IoT Intern</h4><div class="org">Nest Digital · Infopark, Kakkanad</div><p>Embedded hardware integration and smart system deployments. Worked across hardware and firmware teams.</p>
-            <a class="tl-photo-box" href="https://nestdigital.com/" target="_blank" rel="noopener" aria-label="Visit NeST Digital website">
-              <img src="assets/nest-badge.jpg" alt="Abraham Joseph's trainee badge outside NeST Tech Park">
-              <img src="assets/nest-certificate.jpg" alt="Abraham Joseph's NeST Digital Academy completion certificate">
-              <span class="tl-photo-cta">nestdigital.com ↗</span>
-            </a>
-          </div>
+        <div class="experience-group">
+          <div class="tl-group-label">Leadership &amp; Community</div>
+          <div class="tl-item"><div class="when">Nov 2023 – Oct 2024</div><div class="tl-content"><h4>Technical Head</h4><div class="org">ECTA · Christ CoE</div><p>Led a 10+ member tech committee. Organised national tech-fests, hackathons, and workshops in embedded systems and robotics.</p></div></div>
+          <div class="tl-item"><div class="when">Ongoing</div><div class="tl-content"><h4>Membership Development Coordinator</h4><div class="org">IEEE Student Branch</div><p>Driving membership growth and engagement within the IEEE Student Branch. Coordinating outreach, recruitment and events.</p></div></div>
+          <div class="tl-item"><div class="when">Ongoing</div><div class="tl-content"><h4>Accessibility Co-chair &amp; Community Co-lead</h4><div class="org">Young Indians · META Hub</div><p>Working on initiatives that empower students, promote inclusion, and create meaningful community projects.</p></div></div>
+          <div class="tl-item"><div class="when">Ongoing</div><div class="tl-content"><h4>Volunteer</h4><div class="org">IEEE · IEDC Kerala · Jesus Youth International</div><p>Active volunteer across student tech communities and youth leadership programmes. Engineering outreach and mentorship.</p></div></div>
         </div>
-        <div class="tl-item">
-          <div class="when">2024</div>
-          <div><h4>Robotics &amp; IoT Intern</h4><div class="org">CSEED</div><p>Production-ready robotics layouts, IoT systems with GSM/WiFi communication, and embedded control applications from sensor to cloud.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="when">Jul – Oct 2024</div>
-          <div class="tl-item-split">
-            <div class="tl-text"><h4>Embedded &amp; Robotics Intern</h4><div class="org">TORCEDU · Kochi</div><p>C++ development for real-time embedded systems, hardware debugging, and hardware-software integration.</p>
-            <a class="tl-photo-box" href="https://torcedu.com/" target="_blank" rel="noopener" aria-label="Visit TORCEDU website">
-              <img src="assets/torcedu-building.jpg" alt="TORCEDU office building, Kochi">
-              <img src="assets/torcedu-session.jpg" alt="TORCEDU training session">
-              <span class="tl-photo-cta">torcedu.com ↗</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="tl-group-label">Leadership &amp; Community</div>
-        <div class="tl-item">
-          <div class="when">Nov 2023 – Oct 2024</div>
-          <div><h4>Technical Head</h4><div class="org">ECTA · Christ CoE</div><p>Led a 10+ member tech committee. Organised national tech-fests, hackathons, and workshops in embedded systems and robotics.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="when">Ongoing</div>
-          <div><h4>Membership Development Coordinator</h4><div class="org">IEEE Student Branch</div><p>Driving membership growth and engagement within the IEEE Student Branch. Coordinating outreach, recruitment and events.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="when">Ongoing</div>
-          <div><h4>Accessibility Co-chair &amp; Community Co-lead</h4><div class="org">Young Indians · META Hub</div><p>Working on initiatives that empower students, promote inclusion, and create meaningful community projects.</p></div>
-        </div>
-        <div class="tl-item">
-          <div class="when">Ongoing</div>
-          <div><h4>Volunteer</h4><div class="org">IEEE · IEDC Kerala · Jesus Youth International</div><p>Active volunteer across student tech communities and youth leadership programmes. Engineering outreach and mentorship.</p></div>
-        </div>
-
-        <div class="tl-group-label">Training &amp; Outreach</div>
-        <div class="tl-item">
-          <div class="when">Ongoing</div>
-          <div><h4>Resource Person — Robotics, IoT &amp; 3D Printing</h4><div class="org">7+ Institutions · 100+ Students per Session</div><p>Hands-on training in embedded systems, IoT, robotics fundamentals and 3D prototyping.</p></div>
+        <div class="experience-group">
+          <div class="tl-group-label">Training &amp; Outreach</div>
+          <div class="tl-item"><div class="when">Ongoing</div><div class="tl-content"><h4>Resource Person — Robotics, IoT &amp; 3D Printing</h4><div class="org">7+ Institutions · 100+ Students per Session</div><p>Hands-on training in embedded systems, IoT, robotics fundamentals and 3D prototyping.</p></div></div>
         </div>
       </div>
     </div>
